@@ -9,8 +9,8 @@ import {
 import WebViewBridge from 'react-native-webview-bridge';
 
 
-function getVimeoPageURL(videoId) {
-  return 'https://api.trainheroic.com/vimeo?id=' + videoId;
+function getVimeoPageURL(uri, videoId) {
+  return uri + '?id=' + videoId;
 }
 
 
@@ -23,7 +23,8 @@ export default class Vimeo extends React.Component {
     onPlayProgress: React.PropTypes.func,
     onPause: React.PropTypes.func,
     onFinish: React.PropTypes.func,
-    scalesPageToFit: React.PropTypes.bool
+    scalesPageToFit: React.PropTypes.bool,
+    baseURI: React.PropTypes.string.isRequired
   }
 
   constructor() {
@@ -91,7 +92,7 @@ export default class Vimeo extends React.Component {
           marginLeft: -10,
           height: this.props.height
         }}
-        source={{ uri: getVimeoPageURL(this.props.videoId) }}
+        source={{ uri: getVimeoPageURL(this.props.baseURI, this.props.videoId) }}
         scalesPageToFit={this.props.scalesPageToFit}
         scrollEnabled={false}
         onBridgeMessage={this.onBridgeMessage}
