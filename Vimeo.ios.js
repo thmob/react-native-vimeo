@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 import WebViewBridge from 'react-native-webview-bridge';
 
+import PropTypes from 'prop-types';
+
 
 function getVimeoPageURL(uri, videoId) {
   return uri + '?id=' + videoId;
@@ -17,14 +19,14 @@ function getVimeoPageURL(uri, videoId) {
 export default class Vimeo extends React.Component {
 
   static propTypes = {
-    videoId: React.PropTypes.string.isRequired,
-    onReady: React.PropTypes.func,
-    onPlay: React.PropTypes.func,
-    onPlayProgress: React.PropTypes.func,
-    onPause: React.PropTypes.func,
-    onFinish: React.PropTypes.func,
-    scalesPageToFit: React.PropTypes.bool,
-    baseURI: React.PropTypes.string.isRequired
+    videoId: PropTypes.string.isRequired,
+    onReady: PropTypes.func,
+    onPlay: PropTypes.func,
+    onPlayProgress: PropTypes.func,
+    onPause: PropTypes.func,
+    onFinish: PropTypes.func,
+    scalesPageToFit: PropTypes.bool,
+    baseURI: PropTypes.string.isRequired
   }
 
   constructor() {
