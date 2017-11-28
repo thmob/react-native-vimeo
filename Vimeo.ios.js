@@ -15,6 +15,21 @@ function getVimeoPageURL(uri, videoId) {
   return uri + '?id=' + videoId;
 }
 
+// NOTE: Injecting code here due to react-native webview issues when overriding
+// the onMessage method. See here: https://github.com/facebook/react-native/issues/10865
+export const injectedCode = `
+(function() {
+var originalPostMessage = window.postMessage;
+var patchedPostMessage = function(message, targetOrigin, transfer) {
+  originalPostMessage(message, targetOrigin, transfer);
+};
+patchedPostMessage.toString = function() {
+  return String(Object.hasOwnProperty).replace('hasOwnProperty', 'postMessage');
+};
+window.postMessage = patchedPostMessage;
+})();
+`;
+
 
 export default class Vimeo extends React.Component {
 
@@ -49,7 +64,6 @@ export default class Vimeo extends React.Component {
     if (!this.state.ready) {
       throw new Error('You cannot use the `api` method until `onReady` has been called');
     }
-    this.refs.webviewBridge.sendToBridge(method);
     this.registerBridgeEventHandler(method, cb);
   }
 
@@ -94,11 +108,12 @@ export default class Vimeo extends React.Component {
           marginLeft: -10,
           height: this.props.height
         }}
-        source={{ uri: getVimeoPageURL(this.props.baseURI, this.props.videoId) }}
+        injectedJavaScript={injectedCode}
+        source={{ uri: getVimeoPageURL(this.props.videoId) }}
         scalesPageToFit={this.props.scalesPageToFit}
         scrollEnabled={false}
-        onBridgeMessage={this.onBridgeMessage}
-        onError={(error) => console.error(error)}
+        onMessage={this.onBridgeMessage}
+        onError={error => console.error(error)}
       />
     );
   }
