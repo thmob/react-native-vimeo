@@ -4,9 +4,9 @@
  */
 import React from 'react';
 import {
-  StyleSheet
+  StyleSheet,
+  WebView
 } from 'react-native';
-import WebViewBridge from 'react-native-webview-bridge';
 
 import PropTypes from 'prop-types';
 
@@ -86,7 +86,7 @@ export default class Vimeo extends React.Component {
 
   render() {
     return (
-      <WebViewBridge
+      <WebView
         ref="webviewBridge"
         style={{
           // Accounts for player border
