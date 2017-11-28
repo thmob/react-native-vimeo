@@ -21,8 +21,5 @@
   "bugs": {
     "url": "https://github.com/Myagi/react-native-vimeo/issues"
   },
-  "homepage": "https://github.com/Myagi/react-native-vimeo#readme",
-  "peerDependencies": {
-    "react-native-webview-bridge": "^0.20.3"
-  }
+  "homepage": "https://github.com/Myagi/react-native-vimeo#readme"
 }
