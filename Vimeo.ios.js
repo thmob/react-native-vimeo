@@ -109,7 +109,7 @@ export default class Vimeo extends React.Component {
           height: this.props.height
         }}
         injectedJavaScript={injectedCode}
-        source={{ uri: getVimeoPageURL(this.props.videoId) }}
+        source={{ uri: getVimeoPageURL(this.props.baseURI, this.props.videoId) }}
         scalesPageToFit={this.props.scalesPageToFit}
         scrollEnabled={false}
         onMessage={this.onBridgeMessage}
