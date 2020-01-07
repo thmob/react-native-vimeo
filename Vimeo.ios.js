@@ -3,7 +3,8 @@
  * @flow
  */
 import React from 'react';
-import { StyleSheet, WebView } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { WebView } from 'react-native-webview';
 
 import PropTypes from 'prop-types';
 
